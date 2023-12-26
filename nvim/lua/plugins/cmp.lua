@@ -42,18 +42,17 @@ return {
       sources = cmp.config.sources({
         { name = 'nvim_lsp' },
         { name = 'luasnip' }, -- For luasnip users.
-        { name = 'crates' },
-      }, {
         { name = 'buffer' },
+        { name = 'path' },
       }),
-    })
 
-    -- Set configuration for specific filetype.
-    cmp.setup.filetype('gitcommit', {
-      sources = cmp.config.sources({
-        { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
-      }, {
-        { name = 'buffer' },
+      -- Set configuration for specific filetype.
+      cmp.setup.filetype('gitcommit', {
+        sources = cmp.config.sources({
+          { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
+        }, {
+          { name = 'buffer' },
+        }),
       }),
     })
 
@@ -77,7 +76,7 @@ return {
 
     -- snippets
     require('luasnip.loaders.from_vscode').lazy_load({
-      paths = { '~/.config/nvim/snippets' },
+      paths = { '~/.config/nvim/lua/snippets' },
     })
   end,
 }

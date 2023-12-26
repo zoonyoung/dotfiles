@@ -6,10 +6,10 @@ return {
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-    require('lspconfig').html.setup({
+    lspconfig.cssls.setup({
       capabilities = capabilities,
     })
-    lspconfig.cssls.setup({
+    lspconfig.jsonls.setup({
       capabilities = capabilities,
     })
     lspconfig.tailwindcss.setup({})
@@ -19,6 +19,9 @@ return {
         'graphql',
         'gql',
       },
+    })
+    lspconfig.tsserver.setup({
+      capabilities = capabilities,
     })
 
     -- lua

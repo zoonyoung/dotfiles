@@ -1,15 +1,12 @@
 {
   "React Component": {
-    "prefix": "rc",
+    "prefix": "rfc",
     "description": "React Component",
     "body": [
-      "export interface $1Props {",
-      "\t$2",
-      "}",
-      "export function $1(props: $1Props){",
+      "export function $1$TM_FILENAME_BASE(){",
       "\treturn (",
       "\t\t<div>",
-      "\t\t\t$3",
+      "\t\t\t$2",
       "\t\t</div>",
       "\t)",
       "}"
