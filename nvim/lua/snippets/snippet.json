@@ -1,0 +1,18 @@
+{
+  "React Component": {
+    "prefix": "rc",
+    "description": "React Component",
+    "body": [
+      "export interface $1Props {",
+      "\t$2",
+      "}",
+      "export function $1(props: $1Props){",
+      "\treturn (",
+      "\t\t<div>",
+      "\t\t\t$3",
+      "\t\t</div>",
+      "\t)",
+      "}"
+    ]
+  }
+}
