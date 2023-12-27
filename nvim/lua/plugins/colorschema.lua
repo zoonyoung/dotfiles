@@ -4,7 +4,7 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-      vim.g.spaceduck_diagnostic_line_highlight = 1
+      vim.g.everforest_diagnostic_virtual_text = 'colored'
       vim.cmd([[colorscheme spaceduck]])
     end,
   },
