@@ -24,8 +24,9 @@ M.general = {
     ['dw'] = { 'vb"_d' },
     ['H'] = { '0' },
     ['L'] = { '$' },
-    ['DH'] = { 'D0' },
-    ['Dl'] = { 'D$' },
+    ['dH'] = { 'd0' },
+    ['dL'] = { 'd$' },
+    ['ysL'] = { 'ys$' },
 
     -- split Winodw
     ['ss'] = { ':split<Return>' },
@@ -44,8 +45,12 @@ M.general = {
     -- save
     ['<leader>w'] = { '<cmd> w <CR>', 'Save file' },
     ['<leader>q'] = { '<cmd> q <CR>', 'quit file' },
-    ['<leader>x'] = { '<cmd> x <CR>', 'exit file' },
-
+    ['<leader>x'] = {
+      function()
+        require('nvchad.tabufline').close_buffer()
+      end,
+      'Close buffer',
+    },
     -- new buffer
     ['<leader>b'] = { '<cmd> enew <CR>', 'New buffer' },
     ['<leader>ch'] = { '<cmd> NvCheatsheet <CR>', 'Mapping cheatsheet' },
@@ -74,6 +79,8 @@ M.general = {
     },
     ['<'] = { '<gv', 'Indent line' },
     ['>'] = { '>gv', 'Indent line' },
+    ['H'] = { '0' },
+    ['L'] = { '$' },
   },
 
   x = {
@@ -82,6 +89,8 @@ M.general = {
     -- Don't copy the replaced text after pasting in visual mode
     -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
     ['p'] = { 'p:let @+=@0<CR>:let @"=@0<CR>', 'Dont copy replaced text', opts = { silent = true } },
+    ['H'] = { '0' },
+    ['L'] = { '$' },
   },
 }
 
