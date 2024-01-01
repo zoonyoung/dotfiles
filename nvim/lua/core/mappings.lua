@@ -44,7 +44,7 @@ M.general = {
     ['@'] = { '<cmd> tabprev <CR>' },
     -- save
     ['<leader>w'] = { '<cmd> w <CR>', 'Save file' },
-    ['<leader>q'] = { '<cmd> q <CR>', 'quit file' },
+    ['<leader>q'] = { '<cmd> q <Cr>', 'quit file' },
     ['<leader>x'] = {
       function()
         require('nvchad.tabufline').close_buffer()

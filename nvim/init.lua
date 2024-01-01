@@ -18,5 +18,7 @@ end
 
 dofile(vim.g.base46_cache .. 'defaults')
 vim.opt.rtp:prepend(lazypath)
-vim.cmd 'highlight Comment guifg=#AABBCC'
+vim.cmd 'highlight Comment guifg=#888888'
+vim.cmd 'highlight LineNr guifg=#999999'
+vim.cmd 'highlight CursorLineNr guifg=#FFFFFF'
 require 'plugins'
