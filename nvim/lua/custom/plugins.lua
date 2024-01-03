@@ -1,4 +1,38 @@
 local plugins = {
+  -- auto tag
+  {
+    'windwp/nvim-ts-autotag',
+    ft = {
+      'javascript',
+      'javascriptreact',
+      'typescript',
+      'typescriptreact',
+      'html',
+      'jsx',
+      'tsx',
+      'markdown',
+    },
+    config = function()
+      require('nvim-ts-autotag').setup()
+    end,
+  },
+  {
+    'nvim-treesitter/nvim-treesitter',
+    opts = function()
+      local opts = require 'plugins.configs.treesitter'
+      opts.ensure_installed = {
+        'lua',
+        'javascript',
+        'typescript',
+        'tsx',
+        'html',
+        'css',
+        'markdown',
+      }
+      return opts
+    end,
+  },
+
   -- liver-server
   {
     'barrett-ruth/live-server.nvim',

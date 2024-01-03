@@ -25,7 +25,32 @@ local default_plugins = {
     end,
     config = function(_, opts)
       require 'base46.term'
-      require('nvterm').setup(opts)
+      require('nvterm').setup({
+        terminals = {
+          shell = vim.o.shell,
+          list = {},
+          type_opts = {
+            float = {
+              relative = 'editor',
+              row = 0.2,
+              col = 0.1,
+              width = 0.8,
+              height = 0.6,
+              border = "single",
+            },
+            horizontal = { location = "rightbelow", split_ratio = .3, },
+            vertical = { location = "rightbelow", split_ratio = .5 },
+          }
+        },
+        behavior = {
+          autoclose_on_quit = {
+            enabled = false,
+            confirm = true,
+          },
+          close_on_exit = true,
+          auto_insert = true,
+        },
+      })
     end,
   },
 
@@ -61,57 +86,20 @@ local default_plugins = {
     main = 'ibl',
     opts = {},
   },
+
   {
     'nvim-treesitter/nvim-treesitter',
-    event = { 'BufReadPre', 'BufNewFile' },
+    init = function()
+      require('core.utils').lazy_load 'nvim-treesitter'
+    end,
+    cmd = { 'TSInstall', 'TSBufEnable', 'TSBufDisable', 'TSModuleInfo' },
     build = ':TSUpdate',
-    dependencies = {
-      'windwp/nvim-ts-autotag',
-      'axelvc/template-string.nvim',
-    },
-    config = function()
-      require('nvim-treesitter.configs').setup {
-        ensure_installed = {
-          'tsx',
-          'lua',
-          'vim',
-          'typescript',
-          'javascript',
-          'html',
-          'css',
-          'json',
-          'graphql',
-          'regex',
-          'rust',
-          'prisma',
-          'markdown',
-          'markdown_inline',
-        },
-
-        sync_install = false,
-
-        auto_install = true,
-
-        highlight = {
-          enable = true,
-
-          additional_vim_regex_highlighting = false,
-        },
-        autotag = {
-          enable = true,
-        },
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = '<enter>',
-            node_incremental = '<enter>',
-            scope_incremental = false,
-            node_decremental = '<bs>',
-          },
-        },
-      }
-
-      require('template-string').setup {}
+    opts = function()
+      return require 'plugins.configs.treesitter'
+    end,
+    config = function(_, opts)
+      dofile(vim.g.base46_cache .. 'syntax')
+      require('nvim-treesitter.configs').setup(opts)
     end,
   },
 
