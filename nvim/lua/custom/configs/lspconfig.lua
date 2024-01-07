@@ -3,7 +3,7 @@ local on_attach = base.on_attach
 local capabilities = base.capabilities
 local lspconfig = require 'lspconfig'
 
-local servers = { 'tsserver', 'tailwindcss', 'eslint', 'cssls' }
+local servers = { 'tsserver', 'tailwindcss', 'eslint', 'cssls', 'html' }
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
