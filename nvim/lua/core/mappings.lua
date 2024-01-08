@@ -3,47 +3,47 @@
 local M = {}
 
 M.general = {
-  i = {
-    -- go to  beginning and end
-    ['<C-b>'] = { '<ESC>^i', 'Beginning of line' },
-    ['<C-e>'] = { '<End>', 'End of line' },
+i = {
+  -- go to  beginning and end
+  ['<C-b>'] = { '<ESC>^i', 'Beginning of line' },
+  ['<C-e>'] = { '<End>', 'End of line' },
 
-    -- navigate within insert mode
-    ['<C-h>'] = { '<Left>', 'Move left' },
-    ['<C-l>'] = { '<Right>', 'Move right' },
-    ['<C-j>'] = { '<Down>', 'Move down' },
-    ['<C-k>'] = { '<Up>', 'Move up' },
-  },
+  -- navigate within insert mode
+  ['<C-h>'] = { '<Left>', 'Move left' },
+  ['<C-l>'] = { '<Right>', 'Move right' },
+  ['<C-j>'] = { '<Down>', 'Move down' },
+  ['<C-k>'] = { '<Up>', 'Move up' },
+},
 
-  n = {
-    -- custom
-    ['x'] = { '"_x', 'not obverwritten' },
-    ['<leader>p'] = { '"0p' },
-    ['<C-a>'] = { 'ggVG', 'SelectAll' },
-    ['<Esc>'] = { '<cmd> noh <CR>', 'Clear highlights' },
-    ['dw'] = { 'vb"_d' },
-    ['H'] = { '0' },
-    ['L'] = { '$' },
-    ['dH'] = { 'd0' },
-    ['dL'] = { 'd$' },
-    ['ysL'] = { 'ys$' },
+n = {
+  -- custom
+  ['x'] = { '"_x', 'not obverwritten' },
+  ['<leader>p'] = { '"0p' },
+  ['<C-a>'] = { 'ggVG', 'SelectAll' },
+  ['<Esc>'] = { '<cmd> noh <CR>', 'Clear highlights' },
+  ['dw'] = { 'vb"_d' },
+  ['H'] = { '0' },
+  ['L'] = { '$' },
+  ['dH'] = { 'd0' },
+  ['dL'] = { 'd$' },
+  ['ysL'] = { 'ys$' },
 
-    -- split Winodw
-    ['ss'] = { ':split<Return>' },
-    ['sv'] = { ':vsplit<Return>' },
+  -- split Winodw
+  ['ss'] = { ':split<Return>' },
+  ['sv'] = { ':vsplit<Return>' },
 
-    -- switch between windows
-    ['<C-h>'] = { '<C-w>h', 'Window left' },
-    ['<C-l>'] = { '<C-w>l', 'Window right' },
-    ['<C-j>'] = { '<C-w>j', 'Window down' },
-    ['<C-k>'] = { '<C-w>k', 'Window up' },
+  -- switch between windows
+  ['<C-h>'] = { '<C-w>h', 'Window left' },
+  ['<C-l>'] = { '<C-w>l', 'Window right' },
+  ['<C-j>'] = { '<C-w>j', 'Window down' },
+  ['<C-k>'] = { '<C-w>k', 'Window up' },
 
-    -- tab
-    ['te'] = { '<cmd> tabedit <CR>' },
-    ['!'] = { '<cmd> tabnext <CR>' },
-    ['@'] = { '<cmd> tabprev <CR>' },
-    -- save
-    ['<leader>w'] = { '<cmd> w <CR>', 'Save file' },
+  -- tab
+  ['te'] = { '<cmd> tabedit <CR>' },
+  ['!'] = { '<cmd> tabnext <CR>' },
+  ['@'] = { '<cmd> tabprev <CR>' },
+  -- save
+  ['<leader>w'] = { '<cmd> w <CR>', 'Save file' },
     ['<leader>q'] = { '<cmd> q <Cr>', 'quit file' },
     ['<leader>x'] = {
       function()
@@ -235,25 +235,11 @@ M.lspconfig = {
       'Diagnostic setloclist',
     },
 
-    ['<leader>wa'] = {
+    ['<leader>fa'] = {
       function()
         vim.lsp.buf.add_workspace_folder()
       end,
       'Add workspace folder',
-    },
-
-    ['<leader>wr'] = {
-      function()
-        vim.lsp.buf.remove_workspace_folder()
-      end,
-      'Remove workspace folder',
-    },
-
-    ['<leader>wl'] = {
-      function()
-        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-      end,
-      'List workspace folders',
     },
   },
 
@@ -329,7 +315,7 @@ M.nvterm = {
       'Toggle horizontal term',
     },
 
-    ['<leader>v'] = {
+  ['<leader>v'] = {
       function()
         require('nvterm.terminal').toggle 'vertical'
       end,
@@ -377,25 +363,6 @@ M.nvterm = {
   },
 }
 
-M.whichkey = {
-  plugin = true,
-
-  n = {
-    ['<leader>wK'] = {
-      function()
-        vim.cmd 'WhichKey'
-      end,
-      'Which-key all keymaps',
-    },
-    ['<leader>wk'] = {
-      function()
-        local input = vim.fn.input 'WhichKey: '
-        vim.cmd('WhichKey ' .. input)
-      end,
-      'Which-key query lookup',
-    },
-  },
-}
 
 M.blankline = {
   plugin = true,

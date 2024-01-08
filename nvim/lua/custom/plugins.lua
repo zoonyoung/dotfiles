@@ -1,35 +1,32 @@
-local plugins = {
-  -- prettier
-  {
-    'MunifTanjim/prettier.nvim',
-    event = 'VeryLazy',
-    config = function()
-      local prettier = require 'prettier'
-      prettier.setup {
-        cli_options = {
-          arrow_parens = 'always',
-          bracket_spacing = true,
-          bracket_same_line = false,
-          embedded_language_formatting = 'auto',
-          end_of_line = 'lf',
-          html_whitespace_sensitivity = 'css',
-          -- jsx_bracket_same_line = false,
-          jsx_single_quote = true,
-          print_width = 100,
-          prose_wrap = 'preserve',
-          quote_props = 'as-needed',
-          semi = true,
-          single_attribute_per_line = false,
-          single_quote = true,
-          tab_width = 2,
-          trailing_comma = 'es5',
-          use_tabs = false,
-          vue_indent_script_and_style = false,
-        },
+local plugins ={
+  {"williamboman/mason.nvim", 
+  opts = {
+      ensure_installed={
+        "typescript-language-server",
+        "tailwindcss-language-server",
+        "eslint-lsp",
+        "prettierd"
+
       }
+    }
+},
+    -- none-ls
+  {
+    'nvimtools/none-ls.nvim',
+    event = 'VeryLazy',
+    opts = function()
+      return require 'custom.configs.null-ls'
     end,
   },
-  -- auto tag
+    -- lspconfig
+  {
+    'neovim/nvim-lspconfig',
+    config = function()
+      require 'plugins.configs.lspconfig'
+      require 'custom.configs.lspconfig'
+    end,
+  },
+    -- auto tag
   {
     'windwp/nvim-ts-autotag',
     ft = {
@@ -46,7 +43,18 @@ local plugins = {
       require('nvim-ts-autotag').setup()
     end,
   },
-  {
+    -- visual-multi
+    { 'mg979/vim-visual-multi', event = 'VeryLazy' },
+    -- surround
+   {
+    'kylechui/nvim-surround',
+    version = '*', -- Use for stability; omit to use `main` branch for the latest features
+    event = 'VeryLazy',
+    config = function()
+      require('nvim-surround').setup {}
+    end,
+  },
+    {
     'nvim-treesitter/nvim-treesitter',
     opts = function()
       local opts = require 'plugins.configs.treesitter'
@@ -60,48 +68,6 @@ local plugins = {
         'markdown',
       }
       return opts
-    end,
-  },
-
-  -- liver-server
-  {
-    'barrett-ruth/live-server.nvim',
-    event = 'VeryLazy',
-    build = 'yarn global add live-server',
-    config = true,
-  },
-  -- none-ls
-  {
-    'nvimtools/none-ls.nvim',
-    event = 'VeryLazy',
-    opts = function()
-      return require 'custom.configs.null-ls'
-    end,
-  },
-  -- lspconfig
-  {
-    'neovim/nvim-lspconfig',
-    config = function()
-      require 'plugins.configs.lspconfig'
-      require 'custom.configs.lspconfig'
-    end,
-  },
-  -- conform
-  {
-    'stevearc/conform.nvim',
-    lazy = true,
-    event = { 'BufReadPre', 'BufNewFile' }, -- to disable, comment this out
-    config = function()
-      require 'custom.configs.conform'
-    end,
-  },
-  --surround
-  {
-    'kylechui/nvim-surround',
-    version = '*', -- Use for stability; omit to use `main` branch for the latest features
-    event = 'VeryLazy',
-    config = function()
-      require('nvim-surround').setup {}
     end,
   },
 
@@ -134,34 +100,11 @@ local plugins = {
     wants = { 'nvim-treesitter' }, -- or require if not used so far
     after = { 'nvim-cmp' }, -- if a completion plugin is using tabs load it before
   },
-  -- rainbow
-  {
-    'HiPhish/rainbow-delimiters.nvim',
+    {
+    'barrett-ruth/live-server.nvim',
     event = 'VeryLazy',
-    config = function()
-      require 'custom.configs.bracket'
-    end,
+    build = 'yarn global add live-server',
+    config = true,
   },
-  --import
-  { 'Galooshi/vim-import-js', event = 'VeryLazy' },
-  --cursorline
-  {
-    'yamatsum/nvim-cursorline',
-    event = 'VeryLazy',
-    opts = {
-      cursorline = {
-        enable = true,
-        timeout = 1000,
-        number = false,
-      },
-      cursorword = {
-        enable = true,
-        min_length = 3,
-        hl = { underline = true },
-      },
-    },
-  },
-  { 'mg979/vim-visual-multi', event = 'VeryLazy' },
 }
-
 return plugins

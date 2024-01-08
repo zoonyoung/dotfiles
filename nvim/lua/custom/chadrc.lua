@@ -1,7 +1,7 @@
 ---@type ChadrcConfig
 local M = {}
 
-M.ui = { theme = 'rosepine', transparency = false }
-M.plugins = 'custom.plugins'
+M.ui = { theme = 'aquarium', transparency=true}
+M.plugins ='custom.plugins'
 
 return M
