@@ -1,16 +1,19 @@
-local plugins ={
-  {"williamboman/mason.nvim", 
-  opts = {
-      ensure_installed={
+local plugins = {
+  {
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
         "typescript-language-server",
         "tailwindcss-language-server",
         "eslint-lsp",
-        "prettierd"
+        "prettierd",
+        "stylelint-lsp",
+        "stylelint"
 
       }
     }
-},
-    -- none-ls
+  },
+  -- none-ls
   {
     'nvimtools/none-ls.nvim',
     event = 'VeryLazy',
@@ -18,7 +21,7 @@ local plugins ={
       return require 'custom.configs.null-ls'
     end,
   },
-    -- lspconfig
+  -- lspconfig
   {
     'neovim/nvim-lspconfig',
     config = function()
@@ -26,7 +29,7 @@ local plugins ={
       require 'custom.configs.lspconfig'
     end,
   },
-    -- auto tag
+  -- auto tag
   {
     'windwp/nvim-ts-autotag',
     ft = {
@@ -43,10 +46,10 @@ local plugins ={
       require('nvim-ts-autotag').setup()
     end,
   },
-    -- visual-multi
-    { 'mg979/vim-visual-multi', event = 'VeryLazy' },
-    -- surround
-   {
+  -- visual-multi
+  { 'mg979/vim-visual-multi', event = 'VeryLazy' },
+  -- surround
+  {
     'kylechui/nvim-surround',
     version = '*', -- Use for stability; omit to use `main` branch for the latest features
     event = 'VeryLazy',
@@ -54,7 +57,7 @@ local plugins ={
       require('nvim-surround').setup {}
     end,
   },
-    {
+  {
     'nvim-treesitter/nvim-treesitter',
     opts = function()
       local opts = require 'plugins.configs.treesitter'
@@ -76,14 +79,14 @@ local plugins ={
     event = 'VeryLazy',
     config = function()
       require('tabout').setup {
-        tabkey = '<Tab>', -- key to trigger tabout, set to an empty string to disable
+        tabkey = '<Tab>',             -- key to trigger tabout, set to an empty string to disable
         backwards_tabkey = '<S-Tab>', -- key to trigger backwards tabout, set to an empty string to disable
-        act_as_tab = true, -- shift content if tab out is not possible
-        act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
-        default_tab = '<C-t>', -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
-        default_shift_tab = '<C-d>', -- reverse shift default action,
-        enable_backwards = true, -- well ...
-        completion = true, -- if the tabkey is used in a completion pum
+        act_as_tab = true,            -- shift content if tab out is not possible
+        act_as_shift_tab = false,     -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
+        default_tab = '<C-t>',        -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
+        default_shift_tab = '<C-d>',  -- reverse shift default action,
+        enable_backwards = true,      -- well ...
+        completion = true,            -- if the tabkey is used in a completion pum
         tabouts = {
           { open = "'", close = "'" },
           { open = '"', close = '"' },
@@ -98,13 +101,42 @@ local plugins ={
       }
     end,
     wants = { 'nvim-treesitter' }, -- or require if not used so far
-    after = { 'nvim-cmp' }, -- if a completion plugin is using tabs load it before
+    after = { 'nvim-cmp' },        -- if a completion plugin is using tabs load it before
   },
-    {
+  {
     'barrett-ruth/live-server.nvim',
     event = 'VeryLazy',
     build = 'yarn global add live-server',
     config = true,
   },
+  {
+    'stevearc/conform.nvim',
+    lazy = true,
+    event = { 'BufReadPre', 'BufNewFile' }, -- to disable, comment this out
+    config = function()
+      require('conform').setup {
+        formatters_by_ft = {
+          lua = { 'stylua' },
+          javascript = { 'prettierd' },
+          typescript = { 'prettierd' },
+          javascriptreact = { 'prettierd' },
+          typescriptreact = { 'prettierd' },
+          css = { 'stylelint' },
+          html = { 'prettierd' },
+          json = { 'prettierd' },
+          yaml = { 'prettierd' },
+          markdown = { 'prettierd' },
+          graphql = { 'prettierd' },
+        },
+
+        format_on_save = {
+          pattern = '.lua,*.graphql,*.css,*.html,*.json,*.yaml,*.md,*.gql,*.rs',
+          timeout_ms = 500,
+          async = false,
+          lsp_fallback = true,
+        },
+      }
+    end,
+  }
 }
 return plugins
