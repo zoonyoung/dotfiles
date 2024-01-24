@@ -1,0 +1,35 @@
+# bsp, stack or float
+yabai -m config layout bsp
+
+yabai -m config window_placment second_child
+
+
+# padding
+yabai -m config top_padding 0
+yabai -m config bottom_paddng 0
+yabai -m config left_padding 0
+yabai -m config right_padding 0
+yabai -m config window_gap 0
+
+
+# mouse settings
+yabai -m config window_shadow float
+yabai -m config window_opacity on
+yabai -m config window_opacity on
+yabai -m config active_window_opacity 1.0
+yabai -m config normal_window_opacity 0.5
+
+yabai -m config mouse_modifier alt
+# left click + drag
+yabai -m config mouse_action1 move
+#right click + drag
+yabai -m config mouse_action2 resize
+
+yabai -m mouse_drop_action swap
+
+
+# Disable specific apps
+yabai -m rule --add app="^System Settgins$" manage=off
+yabai -m rule --add app="^numi$" manage=off
+yabai -m rule --add app="^Karabiner-Elements$" manage=off
+yabai -m rule --add app="^Sticky Notepad$" manage=off

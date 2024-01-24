@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "live-server": "^1.2.2"
+    "create-sanity": "^3.25.0",
+    "live-server": "git+https://github.com/tapio/live-server.git#ad22544"
   }
 }

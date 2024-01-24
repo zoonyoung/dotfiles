@@ -137,6 +137,10 @@ local plugins = {
         },
       }
     end,
+  },
+  {
+    'heavenshell/vim-jsdoc',
+    event = 'VeryLazy'
   }
 }
 return plugins
