@@ -1,10 +1,13 @@
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local null_ls = require "null-ls"
 
-
 local opts = {
   sources = {
-    null_ls.builtins.formatting.prettierd.with({ extra_args = { "--print-width 120", "--single-quote", "--jsx-single-quote", "--trailing-comma none", "--bracket-same-line", "--arrow-function aovid" } })
+    null_ls.builtins.formatting.prettierd.with {
+      env = {
+        PRETTIERD_DEFAULT_CONFIG = vim.fn.expand "~/.config/nvim/utils/linter-config/.prettierrc.json",
+      },
+    },
   },
   on_attach = function(client, bufnr)
     if client.supports_method "textDocument/formatting" then

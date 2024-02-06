@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "create-sanity": "^3.25.0",
-    "live-server": "git+https://github.com/tapio/live-server.git#ad22544"
+    "live-server": "git+https://github.com/tapio/live-server.git#ad22544",
+    "vscode-langservers-extracted": "^4.8.0"
   }
 }
