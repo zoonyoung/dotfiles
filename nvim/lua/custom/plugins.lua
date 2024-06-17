@@ -1,4 +1,6 @@
 local plugins = {
+  { "styled-components/vim-styled-components" },
+  { "neoclide/coc.nvim" },
   {
     "williamboman/mason.nvim",
     opts = {

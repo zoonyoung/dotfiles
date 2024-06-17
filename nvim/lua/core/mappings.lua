@@ -3,96 +3,96 @@
 local M = {}
 
 M.general = {
-i = {
-  -- go to  beginning and end
-  ['<C-b>'] = { '<ESC>^i', 'Beginning of line' },
-  ['<C-e>'] = { '<End>', 'End of line' },
+  i = {
+    -- go to  beginning and end
+    ["<C-b>"] = { "<ESC>^i", "Beginning of line" },
+    ["<C-e>"] = { "<End>", "End of line" },
 
-  -- navigate within insert mode
-  ['<C-h>'] = { '<Left>', 'Move left' },
-  ['<C-l>'] = { '<Right>', 'Move right' },
-  ['<C-j>'] = { '<Down>', 'Move down' },
-  ['<C-k>'] = { '<Up>', 'Move up' },
-},
+    -- navigate within insert mode
+    ["<C-h>"] = { "<Left>", "Move left" },
+    ["<C-l>"] = { "<Right>", "Move right" },
+    ["<C-j>"] = { "<Down>", "Move down" },
+    ["<C-k>"] = { "<Up>", "Move up" },
+  },
 
-n = {
-  -- custom
-  ['x'] = { '"_x', 'not obverwritten' },
-  ['<leader>p'] = { '"0p' },
-  ['<C-a>'] = { 'ggVG', 'SelectAll' },
-  ['<Esc>'] = { '<cmd> noh <CR>', 'Clear highlights' },
-  ['dw'] = { 'vb"_d' },
-  ['H'] = { '0' },
-  ['L'] = { '$' },
-  ['dH'] = { 'd0' },
-  ['dL'] = { 'd$' },
-  ['yH'] = { 'y0' },
-  ['yL'] = { 'y$' },
-  ['ysL'] = { 'ys$' },
+  n = {
+    -- custom
+    ["x"] = { '"_x', "not obverwritten" },
+    ["<leader>p"] = { '"0p' },
+    ["<C-a>"] = { "ggVG", "SelectAll" },
+    ["<Esc>"] = { "<cmd> noh <CR>", "Clear highlights" },
+    ["dw"] = { 'vb"_d' },
+    ["H"] = { "0" },
+    ["L"] = { "$" },
+    ["dH"] = { "d0" },
+    ["dL"] = { "d$" },
+    ["yH"] = { "y0" },
+    ["yL"] = { "y$" },
+    ["ysL"] = { "ys$" },
 
-  -- split Winodw
-  ['ss'] = { ':split<Return>' },
-  ['sv'] = { ':vsplit<Return>' },
+    -- split Winodw
+    ["ss"] = { ":split<Return>" },
+    ["sv"] = { ":vsplit<Return>" },
 
-  -- switch between windows
-  ['<C-h>'] = { '<C-w>h', 'Window left' },
-  ['<C-l>'] = { '<C-w>l', 'Window right' },
-  ['<C-j>'] = { '<C-w>j', 'Window down' },
-  ['<C-k>'] = { '<C-w>k', 'Window up' },
+    -- switch between windows
+    ["<C-h>"] = { "<C-w>h", "Window left" },
+    ["<C-l>"] = { "<C-w>l", "Window right" },
+    ["<C-j>"] = { "<C-w>j", "Window down" },
+    ["<C-k>"] = { "<C-w>k", "Window up" },
 
-  -- tab
-  ['te'] = { '<cmd> tabedit <CR>' },
-  ['!'] = { '<cmd> tabnext <CR>' },
-  ['@'] = { '<cmd> tabprev <CR>' },
-  -- save
-  ['<leader>w'] = { '<cmd> w <CR>', 'Save file' },
-    ['<leader>q'] = { '<cmd> q <Cr>', 'quit file' },
-    ['<leader>x'] = {
+    -- tab
+    ["te"] = { "<cmd> tabedit <CR>" },
+    ["!"] = { "<cmd> tabnext <CR>" },
+    ["@"] = { "<cmd> tabprev <CR>" },
+    -- save
+    ["<leader>w"] = { "<cmd> w <CR>", "Save file" },
+    ["<leader>q"] = { "<cmd> q <Cr>", "quit file" },
+    ["<leader>x"] = {
       function()
-        require('nvchad.tabufline').close_buffer()
+        require("nvchad.tabufline").close_buffer()
       end,
-      'Close buffer',
+      "Close buffer",
     },
     -- new buffer
-    ['<leader>b'] = { '<cmd> enew <CR>', 'New buffer' },
-    ['<leader>ch'] = { '<cmd> NvCheatsheet <CR>', 'Mapping cheatsheet' },
+    ["<leader>b"] = { "<cmd> enew <CR>", "New buffer" },
+    ["<leader>ch"] = { "<cmd> NvCheatsheet <CR>", "Mapping cheatsheet" },
 
-    ['<leader>fm'] = {
+    ["<leader>fm"] = {
       function()
         vim.lsp.buf.format { async = true }
       end,
-      'LSP formatting',
+      "LSP formatting",
     },
   },
 
   t = {
-    ['<leader>x'] = {
-      vim.api.nvim_replace_termcodes('<C-\\><C-N>', true, true, true),
-      'Escape terminal mode',
+    ["<leader>x"] = {
+      vim.api.nvim_replace_termcodes("<C-\\><C-N>", true, true, true),
+      "Escape terminal mode",
     },
   },
 
   v = {
-    ['<Up>'] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', 'Move up', opts = { expr = true } },
-    ['<Down>'] = {
+    ["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", opts = { expr = true } },
+    ["<Down>"] = {
       'v:count || mode(1)[0:1] == "no" ? "j" : "gj"',
-      'Move down',
+      "Move down",
       opts = { expr = true },
     },
-    ['<'] = { '<gv', 'Indent line' },
-    ['>'] = { '>gv', 'Indent line' },
-    ['H'] = { '0' },
-    ['L'] = { '$' },
+    ["<"] = { "<gv", "Indent line" },
+    [">"] = { ">gv", "Indent line" },
+    ["H"] = { "0" },
+    ["L"] = { "$" },
   },
 
   x = {
-    ['j'] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', 'Move down', opts = { expr = true } },
-    ['k'] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', 'Move up', opts = { expr = true } },
+    ["j"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", opts = { expr = true } },
+    ["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", opts = { expr = true } },
     -- Don't copy the replaced text after pasting in visual mode
     -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
-    ['p'] = { 'p:let @+=@0<CR>:let @"=@0<CR>', 'Dont copy replaced text', opts = { silent = true } },
-    ['H'] = { '0' },
-    ['L'] = { '$' },
+    ["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', "Dont copy replaced text", opts = { silent = true } },
+    ["H"] = { "0" },
+    ["L"] = { "$" },
   },
 }
 
@@ -101,18 +101,18 @@ M.tabufline = {
 
   n = {
     -- cycle through buffers
-    ['<tab>'] = {
+    ["<tab>"] = {
       function()
-        require('nvchad.tabufline').tabuflineNext()
+        require("nvchad.tabufline").tabuflineNext()
       end,
-      'Goto next buffer',
+      "Goto next buffer",
     },
 
-    ['<S-tab>'] = {
+    ["<S-tab>"] = {
       function()
-        require('nvchad.tabufline').tabuflinePrev()
+        require("nvchad.tabufline").tabuflinePrev()
       end,
-      'Goto prev buffer',
+      "Goto prev buffer",
     },
 
     -- close buffer + hide terminal buffer
@@ -124,18 +124,18 @@ M.comment = {
 
   -- toggle comment in both modes
   n = {
-    ['<leader>/'] = {
+    ["<leader>/"] = {
       function()
-        require('Comment.api').toggle.linewise.current()
+        require("Comment.api").toggle.linewise.current()
       end,
-      'Toggle comment',
+      "Toggle comment",
     },
   },
 
   v = {
-    ['<leader>/'] = {
+    ["<leader>/"] = {
       "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
-      'Toggle comment',
+      "Toggle comment",
     },
   },
 }
@@ -146,111 +146,111 @@ M.lspconfig = {
   -- See `<cmd> :help vim.lsp.*` for documentation on any of the below functions
 
   n = {
-    ['gD'] = {
+    ["gD"] = {
       function()
         vim.lsp.buf.declaration()
       end,
-      'LSP declaration',
+      "LSP declaration",
     },
 
-    ['gd'] = {
+    ["gd"] = {
       function()
         vim.lsp.buf.definition()
       end,
-      'LSP definition',
+      "LSP definition",
     },
 
-    ['<leader>K'] = {
+    ["<leader>K"] = {
       function()
         vim.lsp.buf.hover()
       end,
-      'LSP hover',
+      "LSP hover",
     },
 
-    ['gi'] = {
+    ["gi"] = {
       function()
         vim.lsp.buf.implementation()
       end,
-      'LSP implementation',
+      "LSP implementation",
     },
 
-    ['<leader>ls'] = {
+    ["<leader>ls"] = {
       function()
         vim.lsp.buf.signature_help()
       end,
-      'LSP signature help',
+      "LSP signature help",
     },
 
-    ['<leader>D'] = {
+    ["<leader>D"] = {
       function()
         vim.lsp.buf.type_definition()
       end,
-      'LSP definition type',
+      "LSP definition type",
     },
 
-    ['<leader>ra'] = {
+    ["<leader>ra"] = {
       function()
-        require('nvchad.renamer').open()
+        require("nvchad.renamer").open()
       end,
-      'LSP rename',
+      "LSP rename",
     },
 
-    ['<leader>ca'] = {
+    ["<leader>ca"] = {
       function()
         vim.lsp.buf.code_action()
       end,
-      'LSP code action',
+      "LSP code action",
     },
 
-    ['gr'] = {
+    ["gr"] = {
       function()
         vim.lsp.buf.references()
       end,
-      'LSP references',
+      "LSP references",
     },
 
-    ['<leader>lf'] = {
+    ["<leader>lf"] = {
       function()
-        vim.diagnostic.open_float { border = 'rounded' }
+        vim.diagnostic.open_float { border = "rounded" }
       end,
-      'Floating diagnostic',
+      "Floating diagnostic",
     },
 
-    ['[d'] = {
+    ["[d"] = {
       function()
-        vim.diagnostic.goto_prev { float = { border = 'rounded' } }
+        vim.diagnostic.goto_prev { float = { border = "rounded" } }
       end,
-      'Goto prev',
+      "Goto prev",
     },
 
-    [']d'] = {
+    ["]d"] = {
       function()
-        vim.diagnostic.goto_next { float = { border = 'rounded' } }
+        vim.diagnostic.goto_next { float = { border = "rounded" } }
       end,
-      'Goto next',
+      "Goto next",
     },
 
-    ['<leader>q'] = {
+    ["<leader>q"] = {
       function()
         vim.diagnostic.setloclist()
       end,
-      'Diagnostic setloclist',
+      "Diagnostic setloclist",
     },
 
-    ['<leader>fa'] = {
+    ["<leader>fa"] = {
       function()
         vim.lsp.buf.add_workspace_folder()
       end,
-      'Add workspace folder',
+      "Add workspace folder",
     },
   },
 
   v = {
-    ['<leader>ca'] = {
+    ["<leader>ca"] = {
       function()
         vim.lsp.buf.code_action()
       end,
-      'LSP code action',
+      "LSP code action",
     },
   },
 }
@@ -258,7 +258,7 @@ M.lspconfig = {
 M.nvimtree = {
   plugin = true,
   n = {
-    ['<leader>e'] = { '<cmd> NvimTreeToggle <Cr>', 'Toggle nvimtree' },
+    ["<leader>e"] = { "<cmd> NvimTreeToggle <Cr>", "Toggle nvimtree" },
   },
 }
 
@@ -267,34 +267,34 @@ M.telescope = {
 
   n = {
     -- find
-    ['<leader>ff'] = { '<cmd> Telescope find_files <CR>', 'Find files' },
-    ['<leader>fa'] = {
-      '<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>',
-      'Find all',
+    ["<leader>ff"] = { "<cmd> Telescope find_files <CR>", "Find files" },
+    ["<leader>fa"] = {
+      "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>",
+      "Find all",
     },
-    ['<leader>fs'] = {
+    ["<leader>fs"] = {
       function()
-        local builtin = require 'telescope.builtin'
-        builtin.grep_string { search = vim.fn.input 'Grep > ' }
+        local builtin = require "telescope.builtin"
+        builtin.grep_string { search = vim.fn.input "Grep > " }
       end,
-      'Live grep',
+      "Live grep",
     },
-    ['<leader>fb'] = { '<cmd> Telescope buffers <CR>', 'Find buffers' },
-    ['<leader>fh'] = { '<cmd> Telescope help_tags <CR>', 'Help page' },
-    ['<leader>fo'] = { '<cmd> Telescope oldfiles <CR>', 'Find oldfiles' },
-    ['<leader>fz'] = { '<cmd> Telescope current_buffer_fuzzy_find <CR>', 'Find in current buffer' },
+    ["<leader>fb"] = { "<cmd> Telescope buffers <CR>", "Find buffers" },
+    ["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "Help page" },
+    ["<leader>fo"] = { "<cmd> Telescope oldfiles <CR>", "Find oldfiles" },
+    ["<leader>fz"] = { "<cmd> Telescope current_buffer_fuzzy_find <CR>", "Find in current buffer" },
 
     -- git
-    ['<leader>cm'] = { '<cmd> Telescope git_commits <CR>', 'Git commits' },
-    ['<leader>gt'] = { '<cmd> Telescope git_status <CR>', 'Git status' },
+    ["<leader>cm"] = { "<cmd> Telescope git_commits <CR>", "Git commits" },
+    ["<leader>gt"] = { "<cmd> Telescope git_status <CR>", "Git status" },
 
     -- pick a hidden term
-    ['<leader>pt'] = { '<cmd> Telescope terms <CR>', 'Pick hidden term' },
+    ["<leader>pt"] = { "<cmd> Telescope terms <CR>", "Pick hidden term" },
 
     -- theme switcher
-    ['<leader>th'] = { '<cmd> Telescope themes <CR>', 'Nvchad themes' },
+    ["<leader>th"] = { "<cmd> Telescope themes <CR>", "Nvchad themes" },
 
-    ['<leader>ma'] = { '<cmd> Telescope marks <CR>', 'telescope bookmarks' },
+    ["<leader>ma"] = { "<cmd> Telescope marks <CR>", "telescope bookmarks" },
   },
 }
 
@@ -303,76 +303,75 @@ M.nvterm = {
 
   t = {
     -- toggle in terminal mode
-    ['<leader>t'] = {
+    ["<leader>t"] = {
       function()
-        require('nvterm.terminal').toggle 'float'
+        require("nvterm.terminal").toggle "float"
       end,
-      'Toggle floating term',
+      "Toggle floating term",
     },
 
-    ['<leader>h'] = {
+    ["<leader>h"] = {
       function()
-        require('nvterm.terminal').toggle 'horizontal'
+        require("nvterm.terminal").toggle "horizontal"
       end,
-      'Toggle horizontal term',
+      "Toggle horizontal term",
     },
 
-  ['<leader>v'] = {
+    ["<leader>v"] = {
       function()
-        require('nvterm.terminal').toggle 'vertical'
+        require("nvterm.terminal").toggle "vertical"
       end,
-      'Toggle vertical term',
+      "Toggle vertical term",
     },
   },
 
   n = {
     -- toggle in normal mode
-    ['<leader>t'] = {
+    ["<leader>t"] = {
       function()
-        require('nvterm.terminal').toggle 'float'
+        require("nvterm.terminal").toggle "float"
       end,
-      'Toggle floating term',
+      "Toggle floating term",
     },
 
-    ['<leader>h'] = {
+    ["<leader>h"] = {
       function()
-        require('nvterm.terminal').toggle 'horizontal'
+        require("nvterm.terminal").toggle "horizontal"
       end,
-      'Toggle horizontal term',
+      "Toggle horizontal term",
     },
 
-    ['<leader>v'] = {
+    ["<leader>v"] = {
       function()
-        require('nvterm.terminal').toggle 'vertical'
+        require("nvterm.terminal").toggle "vertical"
       end,
-      'Toggle vertical term',
+      "Toggle vertical term",
     },
 
     -- new
-    ['<leader>nh'] = {
+    ["<leader>nh"] = {
       function()
-        require('nvterm.terminal').new 'horizontal'
+        require("nvterm.terminal").new "horizontal"
       end,
-      'New horizontal term',
+      "New horizontal term",
     },
 
-    ['<leader>nv'] = {
+    ["<leader>nv"] = {
       function()
-        require('nvterm.terminal').new 'vertical'
+        require("nvterm.terminal").new "vertical"
       end,
-      'New vertical term',
+      "New vertical term",
     },
   },
 }
-
 
 M.blankline = {
   plugin = true,
 
   n = {
-    ['<leader>cc'] = {
+    ["<leader>cc"] = {
       function()
-        local ok, start = require('indent_blankline.utils').get_current_context(
+        local ok, start = require("indent_blankline.utils").get_current_context(
           vim.g.indent_blankline_context_patterns,
           vim.g.indent_blankline_use_treesitter_scope
         )
@@ -383,7 +382,7 @@ M.blankline = {
         end
       end,
 
-      'Jump to current context',
+      "Jump to current context",
     },
   },
 }
@@ -393,64 +392,63 @@ M.gitsigns = {
 
   n = {
     -- Navigation through hunks
-    [']c'] = {
+    ["]c"] = {
       function()
         if vim.wo.diff then
-          return ']c'
+          return "]c"
         end
         vim.schedule(function()
-          require('gitsigns').next_hunk()
+          require("gitsigns").next_hunk()
         end)
-        return '<Ignore>'
+        return "<Ignore>"
       end,
-      'Jump to next hunk',
+      "Jump to next hunk",
       opts = { expr = true },
     },
 
-    ['[c'] = {
+    ["[c"] = {
       function()
         if vim.wo.diff then
-          return '[c'
+          return "[c"
         end
         vim.schedule(function()
-          require('gitsigns').prev_hunk()
+          require("gitsigns").prev_hunk()
         end)
-        return '<Ignore>'
+        return "<Ignore>"
       end,
-      'Jump to prev hunk',
+      "Jump to prev hunk",
       opts = { expr = true },
     },
 
     -- Actions
-    ['<leader>rh'] = {
+    ["<leader>rh"] = {
       function()
-        require('gitsigns').reset_hunk()
+        require("gitsigns").reset_hunk()
       end,
-      'Reset hunk',
+      "Reset hunk",
     },
 
-    ['<leader>ph'] = {
+    ["<leader>ph"] = {
       function()
-        require('gitsigns').preview_hunk()
+        require("gitsigns").preview_hunk()
       end,
-      'Preview hunk',
+      "Preview hunk",
     },
 
-    ['<leader>gb'] = {
+    ["<leader>gb"] = {
       function()
         package.loaded.gitsigns.blame_line()
       end,
-      'Blame line',
+      "Blame line",
     },
 
-    ['<leader>td'] = {
+    ["<leader>td"] = {
       function()
-        require('gitsigns').toggle_deleted()
+        require("gitsigns").toggle_deleted()
       end,
-      'Toggle deleted',
+      "Toggle deleted",
     },
   },
 }
 
 return M
-
