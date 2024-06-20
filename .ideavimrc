@@ -1,0 +1,165 @@
+" .ideavimrc is a configuration file for IdeaVim plugin. It uses
+"   the same commands as the original .vimrc configuration.
+" You can find a list of commands here: https://jb.ggh38q75
+" Find more examples here: https://jb.gg/share-ideavimrc
+
+"" -- Suggested options --
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+" Global statusline
+highlight Cursor guifg=#1e202f guibg=#bfcaf6
+set laststatus=3
+set showmode=false
+set scrolloff=10
+
+set clipboard=unnamedplus
+set cursorline
+set hlsearch
+
+" Indenting
+set expandtab
+set shiftwidth=2
+set smartindent
+set tabstop=2
+set softtabstop=2
+
+set fillchars=eob:\
+set ignorecase
+set smartcase
+set mouse=a
+
+" Numbers
+set number
+set numberwidth=2
+set ruler=false
+set relativenumber
+
+" Disable nvim intro
+set shortmess+=sI
+
+set signcolumn=yes
+set splitbelow
+set splitright
+set termguicolors
+set timeoutlen=400
+set undofile
+
+" Interval for writing swap file to disk, also used by gitsigns
+set updatetime=250
+
+" Go to previous/next line with h,l,left arrow and right arrow
+" when cursor reaches end/beginning of line
+set whichwrap+=<,>,[,],h,l
+
+" Do incremental searching.
+set incsearch
+
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+
+" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugin
+
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+" Commentary plugin
+Plug 'tpope/vim-commentary'
+" NerdTree
+Plug 'preservim/nerdtree'
+
+
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+"" Map \r to the Reformat Code action
+"map \r <Action>(ReformatCode)
+
+"" Map <leader>d to start debug
+"map <leader>d <Action>(Debug)
+
+"" Map \b to toggle the breakpoint on the current line
+"map \b <Action>(ToggleLineBreakpoint)
+
+" custom
+let mapleader = " "
+nnoremap x "_x
+map <C-a> ggVG
+map <Esc> :noh<CR>
+map dd d_
+map yy y_
+map dw daw
+map H 0
+map L $
+map dH d0
+map dL d$
+map yH y0
+map yL y$
+map ysL ys$
+map <leader>p "0p
+
+" split Window
+map ss :split<CR>
+map sv :vsplit<CR>
+
+" switch between windows
+map <C-h> <C-w>h
+map <C-l> <C-w>l
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+sethandler <C-k> i:ide n:vim
+
+" save and quit
+map <leader>w :w<CR>
+map <leader>q :q<CR>
+map <leader>x :x<CR>
+
+" IdeaVim actions
+map <leader>x <Action>(CloseEditor)
+"tree
+
+" Find file
+map <leader>ff <Action>(GotoFile)
+
+" Find word in files
+map <leader>fs <Action>(FindInPath)
+
+"nerdTree
+map <leader>e :NERDTreeToggle<CR>
+
+"Terminal
+map <leader>t <Action>(ActivateTerminalToolWindow)
+
+" comment
+map <leader>/ <Action>(CommentByLineComment)
+
+"LSP
+" Map for LSP declaration
+map gd <Action>(GotoDeclaration)
+" Map for LSP definition
+map gD <Action>(GotoDefinition)
+" Map for LSP references
+map gr <Action>(GotoReference)
+" Map for LSP implementation
+map gi <Action>(GotoImplementation)
+" Map for LSP hover (Show Error Description)
+map <leader>i <Action>(ShowHoverInfo)
+" Map for LSP signature help
+map <leader>pi <Action>(ParameterInfo)
+" Map for LSP type definition
+map <leader>D <Action>(GotoTypeDeclaration)
+" Map for LSP rename
+map <leader>rn <Action>(RenameElement)
+" Map for LSP code action (Show Intention Actions)
+map <leader>ca <Action>(ShowIntentionActions)
+" Map for floating diagnostic (Show Error Description)
+map <leader>ei <Action>(ShowErrorDescription)
+" Map for goto previous error
+map [d <Action>(GotoPreviousError)
+" Map for goto next error
+map ]d <Action>(GotoNextError)
+
+"CMP
+imap <C-Space> <Action>(CodeCompletion)
+sethandler <C-u> i:ide n:vim
+sethandler <C-d> i:ide n:vim
+
+"TAB
+nmap <Tab> <Action>(NextTab)
+nmap <S-Tab> <Action>(PreviousTab)
