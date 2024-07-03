@@ -46,3 +46,21 @@ keymap.set('n', 'dL', 'd$', opts)
 
 -- nvim tree
 keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<CR>', { desc = 'nvimtree toggle window' })
+
+-- Move to previous/next
+keymap.set('n', '<Tab>', '<Cmd>BufferPrevious<CR>', opts)
+keymap.set('n', '<S-Tab>', '<Cmd>BufferNext<CR>', opts)
+-- Goto buffer in position...
+keymap.set('n', '<A-1>', '<Cmd>BufferGoto 1<CR>', opts)
+keymap.set('n', '<A-2>', '<Cmd>BufferGoto 2<CR>', opts)
+keymap.set('n', '<A-3>', '<Cmd>BufferGoto 3<CR>', opts)
+keymap.set('n', '<A-4>', '<Cmd>BufferGoto 4<CR>', opts)
+keymap.set('n', '<A-5>', '<Cmd>BufferGoto 5<CR>', opts)
+keymap.set('n', '<A-6>', '<Cmd>BufferGoto 6<CR>', opts)
+keymap.set('n', '<A-7>', '<Cmd>BufferGoto 7<CR>', opts)
+keymap.set('n', '<A-8>', '<Cmd>BufferGoto 8<CR>', opts)
+keymap.set('n', '<A-9>', '<Cmd>BufferGoto 9<CR>', opts)
+
+keymap.set('n', '<leader>p', '<Cmd>BufferPin<CR>', opts)
+keymap.set('n', '<leader>c', '<Cmd>BufferCloseAllButPinned<CR>', opts)
+keymap.set('n', '<leader>x', '<Cmd>BufferClose<CR>', opts)

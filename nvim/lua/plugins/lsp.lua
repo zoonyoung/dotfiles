@@ -1,6 +1,9 @@
 return {
   {
     'williamboman/mason.nvim',
+    config = function()
+      require("mason").setup()
+    end,
   },
   {
     'williamboman/mason-lspconfig.nvim',
@@ -8,66 +11,79 @@ return {
       ensure_installed = { 'lua_ls', 'cssls', 'cssmodules_ls', 'css_variables', 'jsonls', 'tsserver', 'spectral', 'tailwindcss' },
     },
   },
-  { -- LSP Configuration & Plugins
-    'neovim/nvim-lspconfig',
-    dependencies = {
-      { 'williamboman/mason.nvim', config = true },
-      'williamboman/mason-lspconfig.nvim',
-      'WhoIsSethDaniel/mason-tool-installer.nvim',
-      { 'j-hui/fidget.nvim', opts = {} },
-      { 'folke/neodev.nvim', opts = {} },
-    },
+
+  {
+    "neovim/nvim-lspconfig",
     config = function()
-      vim.api.nvim_create_autocmd('LspAttach', {
-        group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
-        callback = function(event)
-          local map = function(keys, func, desc)
-            vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
-          end
-          map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-          map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-          map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-          map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-          map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-          map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-          map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-          map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-          map('K', vim.lsp.buf.hover, 'Hover Documentation')
-          map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+      local M = {}
+      local map = vim.keymap.set
 
-          local client = vim.lsp.get_client_by_id(event.data.client_id)
-          if client and client.server_capabilities.documentHighlightProvider then
-            local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
-            vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-              buffer = event.buf,
-              group = highlight_augroup,
-              callback = vim.lsp.buf.document_highlight,
-            })
+      -- export on_attach & capabilities
+      M.on_attach = function(_, bufnr)
+        local function opts(desc)
+          return { buffer = bufnr, desc = "LSP " .. desc }
+        end
 
-            vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-              buffer = event.buf,
-              group = highlight_augroup,
-              callback = vim.lsp.buf.clear_references,
-            })
+        map("n", "gD", vim.lsp.buf.declaration, opts "Go to declaration")
+        map("n", "gd", vim.lsp.buf.definition, opts "Go to definition")
+        map("n", "<leader>D", vim.lsp.buf.type_definition, opts "Go to type definition")
+        map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts "Code action")
+      end
 
-            vim.api.nvim_create_autocmd('LspDetach', {
-              group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
-              callback = function(event2)
-                vim.lsp.buf.clear_references()
-                vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
-              end,
-            })
-          end
-          if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-            map('<leader>th', function()
-              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-            end, '[T]oggle Inlay [H]ints')
-          end
-        end,
-      })
+      -- disable semanticTokens
+      M.on_init = function(client, _)
+        if client.supports_method "textDocument/semanticTokens" then
+          client.server_capabilities.semanticTokensProvider = nil
+        end
+      end
 
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+      M.capabilities = vim.lsp.protocol.make_client_capabilities()
+
+      M.capabilities.textDocument.completion.completionItem = {
+        documentationFormat = { "markdown", "plaintext" },
+        snippetSupport = true,
+        preselectSupport = true,
+        insertReplaceSupport = true,
+        labelDetailsSupport = true,
+        deprecatedSupport = true,
+        commitCharactersSupport = true,
+        tagSupport = { valueSet = { 1 } },
+        resolveSupport = {
+          properties = {
+            "documentation",
+            "detail",
+            "additionalTextEdits",
+          },
+        },
+      }
+
+      M.defaults = function()
+        require("lspconfig").lua_ls.setup {
+          on_attach = M.on_attach,
+          capabilities = M.capabilities,
+          on_init = M.on_init,
+
+          settings = {
+            Lua = {
+              diagnostics = {
+                globals = { "vim" },
+              },
+              workspace = {
+                library = {
+                  vim.fn.expand "$VIMRUNTIME/lua",
+                  vim.fn.expand "$VIMRUNTIME/lua/vim/lsp",
+                  vim.fn.stdpath "data" .. "/lazy/ui/nvchad_types",
+                  vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy",
+                },
+                maxPreload = 100000,
+                preloadFileSize = 10000,
+              },
+            },
+          },
+        }
+      end
+
+      M.defaults()
     end,
   },
 }

@@ -13,7 +13,9 @@ return {
       require('rose-pine').setup {
         disable_background = true,
         styles = {
-          italic = false,
+                  bold = true,
+        italic = false,
+        transparency = false,
         },
       }
     end,

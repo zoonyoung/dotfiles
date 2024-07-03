@@ -1,6 +1,6 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 vim.opt.number = true
 vim.opt.mouse = 'a'
 vim.opt.showmode = false
@@ -22,3 +22,6 @@ vim.opt.scrolloff = 10
 vim.opt.hlsearch = true
 vim.opt.relativenumber = true
 vim.opt.termguicolors = false -- GUI 색상 비활성화
+
+-- Noice 설치로 인한 cmd 높이0
+vim.opt.cmdheight = 0
