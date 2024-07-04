@@ -2,11 +2,11 @@ return {
   'hrsh7th/nvim-cmp',
   event = 'InsertEnter',
   dependencies = {
-    'hrsh7th/cmp-buffer',       -- source for text in buffer
-    'hrsh7th/cmp-path',         -- source for file system paths
-    'L3MON4D3/LuaSnip',         -- snippet engine
+    'hrsh7th/cmp-buffer', -- source for text in buffer
+    'hrsh7th/cmp-path', -- source for file system paths
+    'L3MON4D3/LuaSnip', -- snippet engine
     'saadparwaiz1/cmp_luasnip', -- for autocompletion
-    'onsails/lspkind.nvim',     -- vs-code like pictograms
+    'onsails/lspkind.nvim', -- vs-code like pictograms
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-cmdline',
   },
@@ -23,14 +23,14 @@ return {
 
     local function border(hl_name)
       return {
-        { "╭", hl_name },
-        { "─", hl_name },
-        { "╮", hl_name },
-        { "│", hl_name },
-        { "╯", hl_name },
-        { "─", hl_name },
-        { "╰", hl_name },
-        { "│", hl_name },
+        { '╭', hl_name },
+        { '─', hl_name },
+        { '╮', hl_name },
+        { '│', hl_name },
+        { '╯', hl_name },
+        { '─', hl_name },
+        { '╰', hl_name },
+        { '│', hl_name },
       }
     end
 
@@ -64,12 +64,12 @@ return {
       },
       window = {
         completion = {
-          border = border "CmpBorder",
-          winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:None",
+          border = border 'CmpBorder',
+          winhighlight = 'Normal:CmpPmenu,CursorLine:CmpSel,Search:None',
         },
         documentation = {
-          border = border "CmpDocBorder",
-          winhighlight = "Normal:CmpDoc",
+          border = border 'CmpDocBorder',
+          winhighlight = 'Normal:CmpDoc',
         },
       },
       formatting = {

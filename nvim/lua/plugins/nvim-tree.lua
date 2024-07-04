@@ -1,8 +1,8 @@
 return {
-  {'nvim-tree/nvim-web-devicons'},
+  { 'nvim-tree/nvim-web-devicons' },
   {
     'nvim-tree/nvim-tree.lua',
-        dependencies = { 'nvim-tree/nvim-web-devicons' },
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = {
       filters = {
         dotfiles = false,
@@ -48,7 +48,7 @@ return {
             file = true,
             folder = true,
             folder_arrow = true,
-            git = true,
+            git = false,
           },
 
           glyphs = {
