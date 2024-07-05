@@ -10,23 +10,29 @@ return {
     end,
   },
   {
-    "lukas-reineke/indent-blankline.nvim",
+    'lukas-reineke/indent-blankline.nvim',
     main = 'ibl',
     opts = {
-      indent = { char = "▎" },
-      scope = { char = "▎" },
-      whitespace = { highlight = { "Whitespace", "NonText" } },
-    }
+      indent = { char = '▎' },
+      scope = {
+        char = '▎',
+        show_start = false, -- 범위 시작의 밑줄 비활성화
+        show_end = false, -- 범위 끝의 밑줄 비활성화
+      },
+      whitespace = { highlight = { 'Whitespace', 'NonText' } },
+    },
   },
   -- css색상 background
   { 'norcalli/nvim-colorizer.lua' },
   {
     'romgrk/barbar.nvim',
     dependencies = {
-      'lewis6991/gitsigns.nvim',     -- OPTIONAL: for git status
+      'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
       'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
     },
-    init = function() vim.g.barbar_auto_setup = false end,
+    init = function()
+      vim.g.barbar_auto_setup = false
+    end,
     opts = {
       icons = {
         buffer_index = true,

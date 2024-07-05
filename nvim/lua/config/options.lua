@@ -21,7 +21,10 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 vim.opt.hlsearch = true
 vim.opt.relativenumber = true
-vim.opt.termguicolors = false -- GUI 색상 비활성화
+vim.opt.termguicolors = true
 
 -- Noice 설치로 인한 cmd 높이0
 vim.opt.cmdheight = 0
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
