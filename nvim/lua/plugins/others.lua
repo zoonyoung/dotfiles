@@ -23,7 +23,7 @@ return {
     },
   },
   -- css색상 background
-  { 'norcalli/nvim-colorizer.lua' },
+  { 'norcalli/nvim-colorizer.lua', opts = { '*' } },
   {
     'romgrk/barbar.nvim',
     dependencies = {

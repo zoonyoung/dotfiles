@@ -1,4 +1,13 @@
 return {
+  {
+    'andrew-george/telescope-themes',
+    keys = {
+      { '<leader>th', ':Telescope themes<CR>', { noremap = true, silent = true, desc = 'Theme Switcher' } },
+    },
+    config = function()
+      require('telescope').load_extension 'themes'
+    end,
+  },
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
