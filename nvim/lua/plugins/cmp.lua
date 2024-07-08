@@ -10,17 +10,10 @@ return {
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-cmdline',
   },
-
   config = function()
     local cmp = require 'cmp'
     local luasnip = require 'luasnip'
     local lspkind = require 'lspkind'
-    vim.cmd [[
-  highlight CmpBorder guifg=#ebbcba guibg=NONE
-  highlight CmpDocBorder guifg=#ebbcba guibg=NONE
-  highlight CmpSel guibg=#44475a guifg=#f8f8f2
-]]
-
     local function border(hl_name)
       return {
         { '╭', hl_name },
@@ -59,9 +52,7 @@ return {
     end
 
     cmp.setup {
-      completion = {
-        completeopt = 'menu,menuone,preview,noselect',
-      },
+
       window = {
         completion = {
           border = border 'CmpBorder',
@@ -71,6 +62,10 @@ return {
           border = border 'CmpDocBorder',
           winhighlight = 'Normal:CmpDoc',
         },
+      },
+
+      completion = {
+        completeopt = 'menu,menuone,preview,noselect',
       },
       formatting = {
         format = lspkind.cmp_format {
@@ -94,11 +89,11 @@ return {
           select = true,
         },
       },
+
       sources = cmp.config.sources({
         { name = 'nvim_lsp' },
         { name = 'luasnip' }, -- For luasnip users.
         { name = 'crates' },
-        { name = 'path' },
       }, {
         { name = 'buffer' },
       }),

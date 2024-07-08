@@ -16,11 +16,11 @@ return {
         yaml = { 'prettierd' },
         markdown = { 'prettierd' },
         graphql = { 'prettierd' },
-        scss={'prettier'}
+        scss = { 'prettierd' },
       },
 
       format_on_save = {
-        pattern = '.lua,*.graphql,*.css,*.html,*.json,*.yaml,*.md,*.gql,*.rs',
+        pattern = '.lua,*.graphql,*.css,*.html,*.json,*.yaml,*.md,*.gql,*.rs, *.scss',
         timeout_ms = 500,
         async = false,
         lsp_fallback = true,

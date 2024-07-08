@@ -5,13 +5,7 @@ return {
     'WhoIsSethDaniel/mason-tool-installer.nvim',
   },
   config = function()
-    -- import mason
-    local mason = require 'mason'
-
-    local mason_tool_installer = require 'mason-tool-installer'
-
-    -- enable mason and configure icons
-    mason.setup {
+    require('mason').setup {
       ui = {
         icons = {
           package_installed = '✓',
@@ -21,10 +15,19 @@ return {
       },
     }
 
-    mason_tool_installer.setup {
+    require('mason-lspconfig').setup {}
+    require('mason-tool-installer').setup {
       ensure_installed = {
-        'prettier',
+        'lua-language-server',
+        'css-lsp',
+        'css-variables-language-server',
+        'cssmodules-language-server',
+        'stylua',
         'eslint_d',
+        'prettierd',
+        'stylelint_lsp',
+        'tailwindcss-language-server',
+        'json-lsp',
       },
     }
   end,

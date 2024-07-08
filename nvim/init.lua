@@ -7,6 +7,14 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagn
 vim.keymap.set('n', '<leader>ne', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>nq', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
+vim.api.nvim_create_autocmd('ColorScheme', {
+  pattern = '*',
+  callback = function()
+    vim.api.nvim_set_hl(0, 'CmpBorder', { fg = '#FFCFA8', bg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'CmpDocBorder', { fg = '#FFCFA8', bg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'CmpSel', { bg = '#44475a', fg = '#f8f8f2' })
+  end,
+})
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
