@@ -79,6 +79,19 @@ return {
       local hl = 'DiagnosticSign' .. type
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
     end
+    mason_lspconfig.setup {
+      -- list of servers for mason to install
+      ensure_installed = {
+        'tsserver',
+        'cssmodules_ls',
+        'jsonls',
+        'cssls',
+        'tailwindcss',
+        'lua_ls',
+        'graphql',
+        'stylelint_lsp',
+      },
+    }
 
     mason_lspconfig.setup_handlers {
       -- default handler for installed servers
