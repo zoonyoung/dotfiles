@@ -2,7 +2,7 @@ return {
   { "nvim-tree/nvim-web-devicons" },
   {
     "nvim-tree/nvim-tree.lua",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = { "nvim-tree/nvim-web-devicons", "axelvc/template-string.nvim" },
     opts = {
       filters = {
         dotfiles = false,
